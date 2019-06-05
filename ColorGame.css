@@ -1,0 +1,84 @@
+body{
+	margin: 0;
+	background: #232323;
+	font:cursive;
+
+	
+}
+h1{
+	margin: 0;
+	background: steelblue;
+	color: white;
+	text-align:center;
+	font-weight: normal;
+	text-transform: uppercase;
+	line-height: 35px;
+	padding:10px 0;
+	font-family: cursive;
+}
+.square{
+	width: 30%;
+	background: pink;
+	padding-bottom:30%;
+	margin: 1.66%;
+	float:left;
+	border-radius: 100px;
+	transition: background .7s;
+	-webkit-transition:background .7s;
+	-moz-transition:background .7s;
+}
+
+#container{
+	max-width: 400px;
+	margin:20px auto;	
+}
+
+#stripe{
+	background: white;
+	height: 30px;
+	text-align: center;
+	color: black;
+
+}
+.playagain{
+
+}
+.selected{
+	background: steelblue;
+	color: white;
+}
+button{
+	font-size: inherit;
+	font-weight: bold;
+	background:none;
+	font-family: cursive;
+	border:none;
+	transition: all .4s;
+	-webkit-transition:all .4s;
+	-moz-transition:all .4s;
+	outline: none;
+}
+button:hover{
+	color: white;
+	background: steelblue;
+}
+#colorDisplay{
+	font-weight: 600;
+	font-size: 150%;
+}
+#message{
+	display: inline-block;
+	width: 20%;
+	font-family: cursive;
+	font-weight: 700;
+
+}
+#credit{
+	background: steelblue;
+	text-align: center;
+	margin:0;
+	font-family: cursive;
+	color: white;
+	padding-bottom: 20px;
+	transition:all 0.5s;
+}

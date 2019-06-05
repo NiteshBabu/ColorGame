@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Color Game</title>
+	<style type="text/css">
+		body{
+	margin: 0;
+	background: #232323;
+	font:cursive;
+
+	
+}
+h1{
+	margin: 0;
+	background: steelblue;
+	color: white;
+	text-align:center;
+	font-weight: normal;
+	text-transform: uppercase;
+	line-height: 35px;
+	padding:10px 0;
+	font-family: cursive;
+}
+.square{
+	width: 30%;
+	background: pink;
+	padding-bottom:30%;
+	margin: 1.66%;
+	float:left;
+	border-radius: 100px;
+	transition: background .7s;
+	-webkit-transition:background .7s;
+	-moz-transition:background .7s;
+}
+
+#container{
+	max-width: 400px;
+	margin:20px auto;	
+}
+
+#stripe{
+	background: white;
+	height: 30px;
+	text-align: center;
+	color: black;
+
+}
+.playagain{
+
+}
+.selected{
+	background: steelblue;
+	color: white;
+}
+button{
+	font-size: inherit;
+	font-weight: bold;
+	background:none;
+	font-family: cursive;
+	border:none;
+	transition: all .4s;
+	-webkit-transition:all .4s;
+	-moz-transition:all .4s;
+	outline: none;
+}
+button:hover{
+	color: white;
+	background: steelblue;
+}
+#colorDisplay{
+	font-weight: 600;
+	font-size: 150%;
+}
+#message{
+	display: inline-block;
+	width: 20%;
+	font-family: cursive;
+	font-weight: 700;
+
+}
+#credit{
+	background: steelblue;
+	text-align: center;
+	margin:0;
+	font-family: cursive;
+	color: white;
+	padding-bottom: 20px;
+	transition:all 0.5s;
+}
+
+	</style>
+</head>
+<body>
+<h1>
+	This is a 
+	<br>
+	<span id="colorDisplay">rgb</span> 
+	<br>
+	color guessing game
+	</h1>
+	<h2 id="credit">>Designed By NiteshBabu<</h2>
+<div id="stripe">
+<button id="new">New Color</button>
+	<span id="message"></span>
+	<button class="mode">Easy</button>
+	<button class="mode selected">Hard</button>
+</div>
+<div id="container">
+	<div class="square"></div>
+	<div class="square"></div>
+	<div class="square"></div>
+	<div class="square"></div>
+	<div class="square"></div>
+	<div class="square"></div>
+	
+</div>
+
+<script type="text/javascript">
+	var Game={}
+Game.init=function(){
+	setUpSquares()
+    setUpMode()	
+}
+
+var color=[]
+var num=6
+var square =document.querySelectorAll(".square")
+var pickedColor=pickColor()
+var colorDisplay=document.getElementById("colorDisplay")
+var messageDisplay=document.querySelector("#message")
+var newColor=document.querySelector("#new")
+var h1=document.querySelector("h1")
+var modeButton=document.querySelectorAll(".mode")
+var credit=document.querySelector("#credit")
+
+Game.init();
+
+function setUpMode(){
+	for(var i=0;i<modeButton.length;i++){
+	modeButton[i].addEventListener("click",function(){
+		modeButton[0].classList.remove("selected")
+		modeButton[1].classList.remove("selected")
+		this.classList.add("selected")
+		this.textContent==="Easy"?num=3:num=6
+		reset()
+	});
+ }
+}
+
+function reset(){
+	generateRandomColor(num)
+	pickedColor=pickColor()
+	h1.style.background="steelblue"
+	colorDisplay.textContent=pickedColor
+	newColor.textContent="New Color"
+	messageDisplay.textContent=""
+	credit.style.background="steelblue"
+	for(var i=0;i<square.length;i++){
+		if(i<num){
+			square[i].style.display="block"
+			square[i].style.background=color[i]
+		}
+		else{
+			square[i].style.display="none"
+		}
+	}
+}
+
+newColor.addEventListener("click",function(){
+	reset()
+});
+
+function setUpSquares(){
+	reset();
+	for(var i=0;i<square.length;i++){
+	// add click listeners to squares
+	square[i].addEventListener("click",function(){
+		// grab color of clicked color
+		var clickedColor=this.style.background;
+		// compare clickedColor to pickedColor
+		if(clickedColor==pickedColor){
+			messageDisplay.textContent="Correct....!!!!"
+			changeColor(clickedColor);
+			h1.style.background=pickedColor;
+			newColor.textContent="Play Again"
+			credit.style.background=pickedColor
+		}
+		else{
+			this.style.background="#232323"
+			messageDisplay.textContent="Try Again..!!"
+		}
+		});	
+}
+}
+
+function changeColor(color){
+	for (var i = 0; i < square.length; i++) {
+		square[i].style.background=color;
+	}
+}
+
+function pickColor(){
+	return color[Math.floor(Math.random()*num)]
+}
+function generateRandomColor(num){
+	// create an empty array
+	// loop through num times
+	for(var i=0;i<num;i++){
+		color[i]=randomColor() //generate random color
+	}
+}
+function randomColor(){
+	// generate red b/w 0-255
+	var r=Math.floor(Math.random()*255)
+	// generate green b/w 0-255
+	var g=Math.floor(Math.random()*255)
+	// generate blue b/w 0-255
+	var b=Math.floor(Math.random()*255)
+
+	return "rgb(" + r + ", " + g + ", " + b + ")"
+}
+
+</script>
+
+</body>
+</html>
